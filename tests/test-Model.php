@@ -39,6 +39,10 @@ class TestModel extends WP_UnitTestCase {
 		$this->assertEquals($artists->plural, 'Artists');
 	}
 
+	function testRegistersACustomPostType() {
+		$this->markTestIncomplete();
+	}
+	
 }
 
 class Artists extends Model { }
