@@ -9,6 +9,11 @@
             "email": "alex@recordsonribs.com"
         }
     ],
+    "source": {
+          "type": "git",
+          "url": "https://github.com/recordsonribs/thorax.git",
+          "reference": "master"
+    },
     "require" : {
           "composer/installers": "v1.0.12"
     },
