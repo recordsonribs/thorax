@@ -1,7 +1,7 @@
 <?php
 namespace RecordsOnRibs\Thorax;
 
-abstract class Model {
+abstract class Collection {
 	public $name   = '';
 	public $single = '';
 	public $plural = '';
