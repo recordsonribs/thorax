@@ -6,10 +6,10 @@ class Thorax
 {
     public function __construct()
     {
-
+    	
    	}
 
-   	public function initialize()
+   	public function initialise()
    	{
    		
    	}
