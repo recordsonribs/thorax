@@ -22,7 +22,7 @@ class TestCollection extends WP_UnitTestCase {
 		$this->assertEquals($collection->single, 'Artist');
 	}
 
-	function testInfersNameFromClassName() {
+	function testInfersCustomPostTypeNameFromClassName() {
 		$artists = new Artists();
 		$this->assertEquals($artists->single, 'Artist');
 		$this->assertEquals($artists->plural, 'Artists');
