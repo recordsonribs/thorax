@@ -8,4 +8,9 @@ class Thorax
     {
 
    	}
+
+   	public function intialize()
+   	{
+   		
+   	}
 }

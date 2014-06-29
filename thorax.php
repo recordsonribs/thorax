@@ -10,7 +10,9 @@ Text Domain: thorax
 Domain Path: /languages
 */
 
-// Add some PHP version detection!
-
 require_once dirname(__FILE__) . '/vendor/autoload.php';
+
+$plugin = new RecordsOnRibs\Thorax\Thorax;
+
+$plugin->intialize();
 
