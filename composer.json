@@ -20,5 +20,8 @@
     "require-dev" : {
           "phpunit/phpunit": "*"
     },
+    "autoload": {
+        "psr-0": {"RecordsOnRibs": "src/"}
+    },
     "minimum-stability": "dev"
 }
