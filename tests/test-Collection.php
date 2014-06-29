@@ -33,15 +33,15 @@ class TestCollection extends WP_UnitTestCase {
 	}
 
 	function testGetCollectionObjects() {
-		$this->factory->post->create([ 'post_type' => 'artists' ]);
+		$this->factory->post->create(array( 'post_type' => 'artists' ));
 
 		$this->assertEquals(Artists::get(), get_posts('post_type=artists'));
 	}
 
 	function testAddCollectionObjects() {
-		Artists::add([ 'slug' => 'test' ]);
+		Artists::add(array( 'slug' => 'test' ));
 
-		$this->assertEquals(sizeof(get_posts([ 'post_type' => 'artists', 'slug' => 'test' ])), 1);
+		$this->assertEquals(sizeof(get_posts(array( 'post_type' => 'artists', 'slug' => 'test' ))), 1);
 	}
 
 }

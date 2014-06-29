@@ -3,7 +3,9 @@ namespace RecordsOnRibs\Thorax;
 
 abstract class Collection {
 	public $name   = '';
+
 	public $single = '';
+
 	public $plural = '';
 
 	// Overwrite the defaults for the custom post type.
@@ -13,18 +15,18 @@ abstract class Collection {
 	public $parent = false;
 
 	public static function add( $add = [] ) {
-		$q = [
+		$q = array(
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class()),
 			'post_status' => 'publish'
-		];
+		);
 
 		wp_insert_post( array_merge( $add, $q ) );
 	}
 
 	public static function get() {
-		$q = [
+		$q = array(
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class())
-		];
+		);
 
 		return get_posts($q);
 	}
