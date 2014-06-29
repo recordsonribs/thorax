@@ -2,7 +2,7 @@
     "name": "recordsonribs/thorax",
     "description": "A WordPress plugin to add the management of record labels.",
     "license": "GPL",
-    "type": "wordpress-theme",
+    "type": "wordpress-plugin",
     "authors": [
         {
             "name": "Alex",
