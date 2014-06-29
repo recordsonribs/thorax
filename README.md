@@ -1,7 +1,7 @@
 thorax
 ======
 
-The new version of our record label management software. The successor to [Ribcage](http://github.com/recordsonribs/ribcage). It is designed to be faster, easier to use and easier to setup than Ribcage, using all WordPress's own internals rather than reinventing the wheel.
+The new version of our record label management software. The successor to [Ribcage](http://github.com/recordsonribs/ribcage). It is designed to be faster, easier to use and easier to setup than Ribcage, using all WordPress's own internals if possible rather than reinventing the wheel.
 
 [![Build Status](https://travis-ci.org/recordsonribs/thorax.svg)](https://travis-ci.org/recordsonribs/thorax)
 
