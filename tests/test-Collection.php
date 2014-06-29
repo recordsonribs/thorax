@@ -31,7 +31,7 @@ class TestCollection extends WP_UnitTestCase {
 	function testRegistersACustomPostType() {
 		$this->markTestIncomplete();
 	}
-
+	
 }
 
 class Widget extends Collection { }
