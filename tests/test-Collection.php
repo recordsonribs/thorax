@@ -29,9 +29,21 @@ class TestCollection extends WP_UnitTestCase {
 	}
 
 	function testRegistersACustomPostType() {
-		$this->markTestIncomplete();
+		$this->assertContains('artist', get_post_types());
 	}
-	
+
+	function testGetCollectionObjects() {
+		$this->factory->post->create([ 'post_type' => 'artists' ]);
+
+		$this->assertEquals(Artists::get(), get_posts('post_type=artists'));
+	}
+
+	function testAddCollectionObjects() {
+		Artists::add([ 'slug' => 'test' ]);
+
+		$this->assertEquals(sizeof(get_posts([ 'post_type' => 'artists', 'slug' => 'test' ])), 1);
+	}
+
 }
 
 class Widget extends Collection { }

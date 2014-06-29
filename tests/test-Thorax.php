@@ -16,4 +16,9 @@ class TestIntialise extends WP_UnitTestCase {
 		$this->assertEquals( get_class($this->thorax), 'RecordsOnRibs\Thorax\Thorax');
 	}
 
+	function testThoraxPluginIsLoaded() {
+		$this->markTestSkipped();
+		$this->assertTrue( is_plugin_active('thorax') );
+	}
+
 }

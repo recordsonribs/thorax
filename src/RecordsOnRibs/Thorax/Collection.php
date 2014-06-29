@@ -12,10 +12,31 @@ abstract class Collection {
 	// Set to the parent custom post type - for ease of testing custom post types.
 	public $parent = false;
 
+	public static function add( $add = [] ) {
+		$q = [
+			'post_type' => self::customPostTypeNameFromClassName(get_called_class()),
+			'post_status' => 'publish'
+		];
+
+		wp_insert_post( array_merge( $add, $q ) );
+	}
+
+	public static function get() {
+		$q = [
+			'post_type' => self::customPostTypeNameFromClassName(get_called_class())
+		];
+
+		return get_posts($q);
+	}
+
+	public static function customPostTypeNameFromClassName($t) {
+		$bits = explode('\\', $t);
+		return end($bits);
+	}
+
 	function __construct( $name = false, $single = false, $plural = false, $overwrite = false, $parent = false ) {
 		if ( ! $name ) {
-			$bits = explode('\\', get_class($this));
-			$name = end($bits);
+			$name = self::customPostTypeNameFromClassName(get_class($this));
 		}
 
 		// Fake named parameters - PHP Y U NO RUBY?
@@ -67,7 +88,7 @@ abstract class Collection {
 		}
 	}
 
-	function init() {
+	public function init() {
 		$args = array(
 			'labels'               => $this->create_labels(),
 			'description'          => '',
@@ -98,7 +119,7 @@ abstract class Collection {
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
 	}
 
-	function post_updated_messages( $messages ) {
+	public function post_updated_messages( $messages ) {
 		global $post;
 
 		$this->messages = array(
@@ -120,7 +141,7 @@ abstract class Collection {
 		return $messages;
 	}
 
-	function create_labels() {
+	public function create_labels() {
 		return array(
 			'name'               => $this->plural,
 			'singular_name'      => $this->single,
@@ -137,7 +158,7 @@ abstract class Collection {
 		);
 	}
 
-	function enter_title_here( $content ) {
+	public function enter_title_here( $content ) {
 		global $post;
 
 		if ( $post->post_type != $this->name ) {
@@ -147,7 +168,7 @@ abstract class Collection {
 		return $this->overwrite['enter_title_here'];
 	}
 
-	function admin_post_thumbnail_html( $content ) {
+	public function admin_post_thumbnail_html( $content ) {
 		global $post;
 
 		if ( $post->post_type != $this->name ) {
@@ -157,7 +178,7 @@ abstract class Collection {
 		return $content .= '<p>' . $this->overwrite['featured_image_instruction'] . '</p>';
 	}
 
-	function add_meta_boxes( $post_type, $post ) {
+	public function add_meta_boxes( $post_type, $post ) {
 		global $wp_meta_boxes;
 
 		// Lets smoosh through these and make changes as we see fit!

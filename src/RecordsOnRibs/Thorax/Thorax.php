@@ -2,6 +2,8 @@
 
 namespace RecordsOnRibs\Thorax;
 
+use RecordsOnRibs\Thorax\Collections\Artists as Artists;
+
 class Thorax
 {
     public function __construct()
@@ -11,6 +13,6 @@ class Thorax
 
    	public function initialise()
    	{
-   		
+   		$this->artists = new Artists();
    	}
 }

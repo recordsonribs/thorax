@@ -1,6 +1,6 @@
 <?php
 
-namespace RecordsOnRibs\Thorax;
+namespace RecordsOnRibs\Thorax\Collections;
 
 use RecordsOnRibs\Thorax\Collection as Collection;
 
