@@ -14,7 +14,7 @@ abstract class Collection {
 	// Set to the parent custom post type - for ease of testing custom post types.
 	public $parent = false;
 
-	public static function add( $add = [] ) {
+	public static function add( $add = array() ) {
 		$q = array(
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class()),
 			'post_status' => 'publish'
