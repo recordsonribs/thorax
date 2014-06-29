@@ -5,7 +5,7 @@ The new version of our record label management software. The successor to [Ribca
 
 [![Build Status](https://travis-ci.org/recordsonribs/thorax.svg)](https://travis-ci.org/recordsonribs/thorax)
 
-**This version is not ready for use but is under development.**
+*This version is not ready for use but is under development.*
 
 # Why WordPress?
 
