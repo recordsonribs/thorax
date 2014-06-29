@@ -12,7 +12,7 @@ Domain Path: /languages
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 
-$plugin = new RecordsOnRibs\Thorax\Thorax;
+$thorax = new RecordsOnRibs\Thorax\Thorax;
 
-$plugin->intialize();
+$thorax->initialize();
 

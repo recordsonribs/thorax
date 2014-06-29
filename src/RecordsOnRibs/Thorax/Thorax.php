@@ -9,7 +9,7 @@ class Thorax
 
    	}
 
-   	public function intialize()
+   	public function initialize()
    	{
    		
    	}
