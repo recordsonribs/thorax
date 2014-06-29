@@ -15,4 +15,4 @@ Like its predecesor Ribcage we do so in the hope that since WordPress is widely 
 
 While Ribcage directly accessed the WordPress MySQL database, Thorax works using standard WordPress custom post types (such things did not exist when Ribcage was first written!). Therefore it can be themed by adding themed custom post types to your WordPress theme and falls back through the WordPress [template hierachy](http://codex.wordpress.org/Template_Hierarchy) if these are not present.
 
-Thorax contains three custom post types: artists, releases and events.
+Thorax contains three custom post types: artists, releases and events. Artists have releases and events - standard WordPress blog entries can also be related to an individual artist or release. Releases have reviews.
