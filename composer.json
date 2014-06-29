@@ -17,5 +17,8 @@
     "require" : {
           "composer/installers": "v1.0.12"
     },
+    "require-dev" : {
+          "phpunit/phpunit": "*"
+    },
     "minimum-stability": "dev"
 }
