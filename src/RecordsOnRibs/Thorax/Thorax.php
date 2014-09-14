@@ -13,6 +13,6 @@ class Thorax
 
    	public function initialise()
    	{
-   		$this->artists = new Artists();
+   		$this->artists = new Artists(['parent' => true]);
    	}
 }
