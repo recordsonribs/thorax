@@ -105,7 +105,7 @@ abstract class Collection {
 			'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 			'register_meta_box_cb' => array( $this, 'metaboxes' ),
 			'rewrite'              => array(
-										'slug' => strtolower( $this->single ),
+										'slug' => strtolower( $this->plural ),
 										'with_front' => false,
 										'feeds' => true,
 										'pages' => true,
