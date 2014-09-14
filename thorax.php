@@ -14,5 +14,3 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 $thorax = new RecordsOnRibs\Thorax\Thorax;
 
-$thorax->initialise();
-

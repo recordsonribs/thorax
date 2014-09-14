@@ -9,7 +9,7 @@ class Thorax
 {
     public function __construct()
     {
-    	
+		$this->initialise();	
    	}
 
    	public function initialise()
