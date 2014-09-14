@@ -37,13 +37,15 @@ abstract class Collection {
 	}
 
 	function __construct( $name = false, $single = false, $plural = false, $overwrite = false, $parent = false ) {
-		if ( ! $name ) {
-			$name = self::customPostTypeNameFromClassName(get_class($this));
+		// Fake named parameters.
+		if ( is_array( $name ) )  {
+			extract( $name, EXTR_IF_EXISTS );
 		}
 
-		// Fake named parameters - PHP Y U NO RUBY?
-		if ( is_array( $name ) ) 
-			extract( $name, EXTR_IF_EXISTS );
+		// If we are passing fake named parameters we also need to infer the name.
+		if ( ! $name || is_array( $name ) ) {
+			$name = self::customPostTypeNameFromClassName(get_class($this));
+		}
 
 		if ( substr( $name, -1 ) == 's' ) {
 			$this->name = rtrim( $name, 's' );
