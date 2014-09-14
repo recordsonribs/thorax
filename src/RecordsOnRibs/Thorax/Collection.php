@@ -71,7 +71,7 @@ abstract class Collection {
 
 		// Make sure that we over-write the 'hiearchical' variable for custom post types with parents.
 		if ( $parent ) {
-			$overwrite['hierarchical'] = true;
+			$this->overwrite['hierarchical'] = true;
 		}
 
 		add_action( 'init', array( $this, 'init' ) );
@@ -93,6 +93,12 @@ abstract class Collection {
 	}
 
 	public function init() {
+		$supports = array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' );
+
+		if ( isset( $this->overwrite['hierarchical'] ) && $this->overwrite['hierarchical'] == true ) {
+			array_push( $supports, 'page-attributes' );
+		}
+
 		$args = array(
 			'labels'               => $this->create_labels(),
 			'description'          => '',
@@ -104,7 +110,7 @@ abstract class Collection {
 			'hierarchical'         => false,
 			'show_in_menu'         => true,
 			'menu_position'        => 50,
-			'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+			'supports'             => $supports,
 			'register_meta_box_cb' => array( $this, 'metaboxes' ),
 			'rewrite'              => array(
 										'slug' => strtolower( $this->plural ),
