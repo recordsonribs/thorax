@@ -151,6 +151,17 @@ abstract class Collection {
 		return $messages;
 	}
 
+	public function add_rewrite_rule () {
+		$query_param = rtrim( $this->has_many, 's' );
+		add_rewrite_rule( strtolower( $this->plural ) . '/([^/]+)/([^/]+)', 'index.php?' . $query_param . '=$matches[2]', 'top' );
+	}
+
+	public function has_many( $of ) {
+		$this->has_many = $of;
+
+		add_action( 'init', array( $this, 'add_rewrite_rule' ) );
+	}
+
 	public function create_labels() {
 		return array(
 			'name'               => $this->plural,

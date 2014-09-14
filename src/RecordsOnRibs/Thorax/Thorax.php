@@ -14,7 +14,9 @@ class Thorax
 
    	public function initialise()
    	{
-   		$this->artists = new Artists( [ 'parent' => true] );
+   		$this->artists = new Artists( [ 'parent' => true ] );
+   		$this->artists->has_many( 'releases' );
+   		
    		$this->releases = new Releases( [ 'parent' => true ] );
    	}
 }
