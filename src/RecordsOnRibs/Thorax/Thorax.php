@@ -7,16 +7,17 @@ use RecordsOnRibs\Thorax\Collections\Releases as Releases;
 
 class Thorax
 {
-    public function __construct()
-    {
+		public function __construct()
+		{
 		$this->initialise();	
-   	}
+		}
 
-   	public function initialise()
-   	{
-   		$this->artists = new Artists( [ 'parent' => true ] );
-   		$this->artists->has_many( 'releases' );
+		public function initialise()
+		{
+			$this->artists = new Artists( [ 'parent' => true ] );
+			$this->artists->has_many( 'releases' );
+			$this->artists
 
-   		$this->releases = new Releases( [ 'parent' => true ] );
-   	}
+			$this->releases = new Releases( [ 'parent' => true ] );
+		}
 }
