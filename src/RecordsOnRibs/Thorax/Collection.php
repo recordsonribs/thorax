@@ -4,6 +4,8 @@ namespace RecordsOnRibs\Thorax;
 abstract class Collection {
 	public $name   = '';
 
+	public $post_type = '';
+
 	public $single = '';
 
 	public $plural = '';
@@ -58,6 +60,8 @@ abstract class Collection {
 		} else {
 			$this->single = ucfirst( strtolower( $this->name ) );
 		}
+
+		$this->post_type = strtolower( $this->single );
 
 		if ( $plural ) {
 			$this->plural = $plural;
@@ -179,14 +183,20 @@ abstract class Collection {
 		];
 	}
 
+	private function are_we_on_the_post_type(){
+		global $post;
+
+		return ( $post->post_type == $this->post_type );
+	}
+
 	public function enter_title_here( $content ) {
 		global $post;
 
-		if ( $post->post_type != $this->name ) {
+		if ( $post->post_type != $this->post_type ) {
 			return $content;
 		}
 
-		return $this->overwrite['enter_title_here'];
+		return $this->overwrite['title_prompt'];
 	}
 
 	public function admin_post_thumbnail_html( $content ) {
@@ -200,19 +210,28 @@ abstract class Collection {
 	}
 
 	public function add_meta_boxes( $post_type, $post ) {
+		if (! $this->are_we_on_the_post_type()){
+			return;
+		}
+		
 		global $wp_meta_boxes;
+		global $post;
 
-		// Lets smoosh through these and make changes as we see fit!
+		// Filter boxes.
 		foreach ( [ 'side', 'normal' ] as $column ) {
-			foreach ( [ 'core', 'low' ] as $placing ) {
-				foreach ( $wp_meta_boxes[$this->name][$column][$placing] as $meta_box_name => $meta_box ) {
-					foreach ( $this->overwrite['meta_box_titles'] as $overwrite => $with ) {
-						if ( $meta_box['title'] == $overwrite ) {
-							$wp_meta_boxes[$this->name][$column][$placing][$meta_box_name]['title'] = $with;
-						}
+			if (! $wp_meta_boxes[$this->post_type][$column]) {
+				return;
+			}
+
+			foreach( $wp_meta_boxes[$this->post_type][$column] as &$metabox_list ) {
+				foreach($metabox_list as &$metabox) {
+					if ( isset( $this->overwrite['meta_box_titles'][$metabox['title']] ) ) {
+						$metabox['title'] = $this->overwrite['meta_box_titles'][$metabox['title']];
 					}
 				}
 			}
 		}
+
+		return;
 	}
 }
