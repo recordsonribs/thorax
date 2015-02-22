@@ -14,9 +14,15 @@ class Thorax
 
 		public function initialise()
 		{
-			$this->artists = new Artists( [ 'parent' => true ] );
+			$artist_overwrites = [
+				'title_prompt' => 'Enter artist name here',
+				'meta_box_titles' => [
+					'Excerpt' => 'Short Description'
+				]
+			];
+
+			$this->artists = new Artists( [ 'parent' => true, 'overwrite' =>  $artist_overwrites ] );
 			$this->artists->has_many( 'releases' );
-			$this->artists
 
 			$this->releases = new Releases( [ 'parent' => true ] );
 		}
