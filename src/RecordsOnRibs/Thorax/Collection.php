@@ -9,24 +9,24 @@ abstract class Collection {
 	public $plural = '';
 
 	// Overwrite the defaults for the custom post type.
-	private $overwrite = array();
+	private $overwrite = [];
 
 	// Set to the parent custom post type - for ease of testing custom post types.
 	public $parent = false;
 
-	public static function add( $add = array() ) {
-		$q = array(
+	public static function add( $add = [] ) {
+		$q = [
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class()),
 			'post_status' => 'publish'
-		);
+		];
 
 		wp_insert_post( array_merge( $add, $q ) );
 	}
 
 	public static function get() {
-		$q = array(
+		$q = [
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class())
-		);
+		];
 
 		return get_posts($q);
 	}
@@ -74,32 +74,32 @@ abstract class Collection {
 			$this->overwrite['hierarchical'] = true;
 		}
 
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', [ $this, 'init' ] );
 
 		// Overwrite the 'Enter title here' for the post type
 		if ( isset( $this->overwrite['title_prompt'] ) ) {
-			add_filter( 'enter_title_here', array( $this, 'enter_title_here' ) );
+			add_filter( 'enter_title_here', [ $this, 'enter_title_here' ] );
 		}
 
 		// Overwrite the little instruction underneith the Featured Image metabox
 		if ( isset( $this->overwrite['featured_image_instruction'] ) ) {
-			add_filter( 'admin_post_thumbnail_html', array( $this, 'admin_post_thumbnail_html' ) );
+			add_filter( 'admin_post_thumbnail_html', [ $this, 'admin_post_thumbnail_html' ] );
 		}
 
 		// Overwrite metabox title text!
 		if ( isset( $this->overwrite['meta_box_titles'] ) ) {
-			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
+			add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ], 10, 2 );
 		}
 	}
 
 	public function init() {
-		$supports = array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' );
+		$supports = [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ];
 
 		if ( isset( $this->overwrite['hierarchical'] ) && $this->overwrite['hierarchical'] == true ) {
 			array_push( $supports, 'page-attributes' );
 		}
 
-		$args = array(
+		$args = [
 			'labels'               => $this->create_labels(),
 			'description'          => '',
 			'public'               => true,
@@ -120,13 +120,13 @@ abstract class Collection {
 			),
 			'can_export'           => true,
 			'show_in_nav_menus'    => true,
-		);
+		];
 
 		$args = array_merge( $args, $this->overwrite );
 
 		register_post_type( $this->name, $args );
 
-		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
+		add_filter( 'post_updated_messages', [ $this, 'post_updated_messages' ] );
 	}
 
 	public function post_updated_messages( $messages ) {
@@ -159,11 +159,11 @@ abstract class Collection {
 	public function has_many( $of ) {
 		$this->has_many = $of;
 
-		add_action( 'init', array( $this, 'add_rewrite_rule' ) );
+		add_action( 'init', [ $this, 'add_rewrite_rule' ] );
 	}
 
 	public function create_labels() {
-		return array(
+		return [
 			'name'               => $this->plural,
 			'singular_name'      => $this->single,
 			'add_new'            => __( "Add New $this->single" ),
@@ -176,7 +176,7 @@ abstract class Collection {
 			'not_found'          => "No $this->plural found",
 			'not_found_in_trash' => "No $this->plural found in trash",
 			'menu_name' => $this->plural,
-		);
+		];
 	}
 
 	public function enter_title_here( $content ) {
@@ -203,8 +203,8 @@ abstract class Collection {
 		global $wp_meta_boxes;
 
 		// Lets smoosh through these and make changes as we see fit!
-		foreach ( array( 'side', 'normal' ) as $column ) {
-			foreach ( array( 'core', 'low' ) as $placing ) {
+		foreach ( [ 'side', 'normal' ] as $column ) {
+			foreach ( [ 'core', 'low' ] as $placing ) {
 				foreach ( $wp_meta_boxes[$this->name][$column][$placing] as $meta_box_name => $meta_box ) {
 					foreach ( $this->overwrite['meta_box_titles'] as $overwrite => $with ) {
 						if ( $meta_box['title'] == $overwrite ) {
