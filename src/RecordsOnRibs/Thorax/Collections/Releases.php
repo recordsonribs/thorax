@@ -53,6 +53,41 @@ class Releases extends Collection {
 			]
 		]);
 
+		array_push($metaboxes, [
+			'id'            => $prefix . 'artist',
+			'title'         => 'Artist',
+			'object_types'  => [ $this->post_type ],
+			'context'       => 'side',
+			'priority' => 'high',
+			'fields' => [
+				[
+	        		'desc'    => __( 'Artist releasing this' ),
+	        		'id'      => $prefix . 'artist',
+	        		'type'    => 'select',
+	        		'options' => $this->get_releasers( [ 'post_type' => 'artist', 'numberposts' => 5 ] )
+				]
+			]
+		]);
+
 		parent::__construct( [ 'parent' => true, 'metaboxes' => $metaboxes, 'overwrite' => $overwrites ] );
+	}
+
+	function get_releasers( $query_args ){
+		$args = wp_parse_args( $query_args, [
+		    'post_type'   => 'post',
+		    'numberposts' => 10,
+		] );
+
+		$posts = get_posts( $args );
+
+		$post_options = [];
+
+		if ( $posts ) {
+		    foreach ( $posts as $post ) {
+		      $post_options[ $post->ID ] = $post->post_title;
+		    }
+		}
+
+		return $post_options;
 	}
 }
