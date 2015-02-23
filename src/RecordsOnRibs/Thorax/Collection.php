@@ -147,10 +147,6 @@ abstract class Collection {
 	}
 
 	public function metaboxes( ) {
-		if (! is_array($this->metaboxes)) {
-			return;
-		}
-
 		foreach ($this->metaboxes as $metabox) {
 			new Metabox($metabox);
 		}
