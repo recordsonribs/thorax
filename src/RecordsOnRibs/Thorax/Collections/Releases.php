@@ -64,7 +64,7 @@ class Releases extends Collection {
 	        		'desc'    => __( 'Artist releasing this' ),
 	        		'id'      => $prefix . 'artist',
 	        		'type'    => 'select',
-	        		'options' => $this->get_releasers( [ 'post_type' => 'artist', 'numberposts' => 5 ] )
+	        		'options' => $this->get_releasers()
 				]
 			]
 		]);
@@ -72,13 +72,8 @@ class Releases extends Collection {
 		parent::__construct( [ 'parent' => true, 'metaboxes' => $metaboxes, 'overwrite' => $overwrites ] );
 	}
 
-	function get_releasers( $query_args ){
-		$args = wp_parse_args( $query_args, [
-		    'post_type'   => 'post',
-		    'numberposts' => 10,
-		] );
-
-		$posts = get_posts( $args );
+	function get_releasers(){
+		$posts = get_posts( [ 'post_type' => 'artist', 'numberposts' => -1 ] );
 
 		$post_options = [];
 
