@@ -7,11 +7,11 @@ use RecordsOnRibs\Thorax\Collection as Collection;
 class Artists extends Collection { 
 	function __construct() {
 		$artist_overwrites = [
-				'title_prompt' => 'Enter artist name here',
-				'meta_box_titles' => [
-					'Excerpt' => 'Short Description'
-				]
-			];
+			'title_prompt' => 'Enter artist name here',
+			'meta_box_titles' => [
+				'Excerpt' => 'Short Description'
+			]
+		];
 
 		$prefix = '_artists_';
 
