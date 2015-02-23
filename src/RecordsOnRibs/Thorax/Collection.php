@@ -16,7 +16,7 @@ abstract class Collection {
 	// Set to the parent custom post type - for ease of testing custom post types.
 	public $parent = false;
 
-	public static function add( $add = [] ) {
+	public static function add( array $add = [] ) {
 		$q = [
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class()),
 			'post_status' => 'publish'
@@ -25,7 +25,7 @@ abstract class Collection {
 		wp_insert_post( array_merge( $add, $q ) );
 	}
 
-	public static function get() {
+	public static function get( ) {
 		$q = [
 			'post_type' => self::customPostTypeNameFromClassName(get_called_class())
 		];
@@ -128,7 +128,7 @@ abstract class Collection {
 
 		$args = array_merge( $args, $this->overwrite );
 
-		register_post_type( $this->name, $args );
+		register_post_type( $this->post_type, $args );
 
 		add_filter( 'post_updated_messages', [ $this, 'post_updated_messages' ] );
 	}
@@ -150,7 +150,7 @@ abstract class Collection {
 			10 => sprintf( "$this->single draft updated. <a target=\"_blank\" href=\"%s\">Preview $this->single</a>", esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
 		);
 
-		$messages[$this->name] = $this->messages;
+		$messages[$this->post_type] = $this->messages;
 
 		return $messages;
 	}
@@ -202,7 +202,7 @@ abstract class Collection {
 	public function admin_post_thumbnail_html( $content ) {
 		global $post;
 
-		if ( $post->post_type != $this->name ) {
+		if ( $post->post_type != $this->post_type ) {
 			return $content;
 		}
 
@@ -213,7 +213,7 @@ abstract class Collection {
 		if (! $this->are_we_on_the_post_type()){
 			return;
 		}
-		
+
 		global $wp_meta_boxes;
 		global $post;
 
