@@ -3,6 +3,7 @@
 namespace RecordsOnRibs\Thorax\Collections;
 
 use RecordsOnRibs\Thorax\Collection as Collection;
+use \CMB2 as Metabox;
 
 class Artists extends Collection { 
 	function __construct() {
@@ -21,7 +22,7 @@ class Artists extends Collection {
 	function metaboxes( ) {
 		$prefix = '_artist_';
 
-		new \CMB2([
+		new Metabox([
 			'id'            => $prefix . 'urls',
 			'title'         => 'Elsewhere',
 			'object_types'  => [ $this->post_type, ],
@@ -73,7 +74,7 @@ class Artists extends Collection {
 			]
 		]);
 
-		new \CMB2([
+		new Metabox([
 			'id'            => $prefix . 'press',
 			'title'         => 'Press Information',
 			'object_types'  => [ $this->post_type, ],
