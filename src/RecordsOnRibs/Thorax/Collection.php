@@ -155,7 +155,7 @@ abstract class Collection {
 	public function post_updated_messages( $messages ) {
 		global $post;
 
-		$this->messages = array(
+		$this->messages = [
 			0  => '', // Unused in WordPress messages
 			1  => sprintf( "$this->single updated. <a href='%s'>View $this->single</a>", esc_url( get_permalink( $post->ID ) ) ),
 			2  => __( 'Custom field updated.' ),
@@ -167,7 +167,7 @@ abstract class Collection {
 			8  => sprintf( "$this->single submitted. <a target='_blank' href='%s'>Preview $this->single</a>", esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
 			9  => sprintf( 'Page scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview page</a>', date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
 			10 => sprintf( "$this->single draft updated. <a target=\"_blank\" href=\"%s\">Preview $this->single</a>", esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
-		);
+		];
 
 		$messages[$this->post_type] = $this->messages;
 
