@@ -15,11 +15,13 @@ class Artists extends Collection {
 
 		$prefix = '_artists_';
 
+		$this->post_type = 'artist';
+
 		$metaboxes = [
 			[
 				'id'            => $prefix . 'urls',
 				'title'         => 'Elsewhere',
-				'object_types'  => [ $this->post_type, ],
+				'object_types'  => [ $this->post_type ],
 				'context'       => 'side',
 				'priority' => 'low',
 				'fields' => [
