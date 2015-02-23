@@ -6,11 +6,18 @@ use RecordsOnRibs\Thorax\Collection as Collection;
 
 class Releases extends Collection { 
 	function __construct() {
+		$this->post_type = 'release';
+
+		$overwrites = [
+			'title_prompt' => 'Enter release title here',
+			'meta_box_titles' => [
+				'Excerpt' => 'Short Description'
+			]
+		];
+
 		$metaboxes = [];
 
-		$prefix = '_release_';
-
-		$this->post_type = 'release';
+		$prefix = '_' . $this->post_type . 'release_';
 
 		$tracks = [
 			'id'          => $prefix . 'track_listing',
@@ -46,6 +53,6 @@ class Releases extends Collection {
 			]
 		]);
 
-		parent::__construct( [ 'parent' => true, 'metaboxes' => $metaboxes ] );
+		parent::__construct( [ 'parent' => true, 'metaboxes' => $metaboxes, 'overwrite' => $overwrites ] );
 	}
 }
