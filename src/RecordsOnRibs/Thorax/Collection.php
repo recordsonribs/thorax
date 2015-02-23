@@ -1,6 +1,8 @@
 <?php
 namespace RecordsOnRibs\Thorax;
 
+use \CMB2 as Metabox;
+
 abstract class Collection {
 	public $name   = '';
 
@@ -12,6 +14,9 @@ abstract class Collection {
 
 	// Overwrite the defaults for the custom post type.
 	private $overwrite = [];
+
+	// Metaboxes to create.
+	public $metaboxes;
 
 	// Set to the parent custom post type - for ease of testing custom post types.
 	public $parent = false;
@@ -38,7 +43,7 @@ abstract class Collection {
 		return end($bits);
 	}
 
-	function __construct( $name = false, $single = false, $plural = false, $overwrite = false, $parent = false ) {
+	function __construct( $name = false, $single = false, $plural = false, $overwrite = false, $parent = false, $metaboxes = false) {
 		// Fake named parameters.
 		if ( is_array( $name ) )  {
 			extract( $name, EXTR_IF_EXISTS );
@@ -67,6 +72,10 @@ abstract class Collection {
 			$this->plural = $plural;
 		} else {
 			$this->plural = $this->single . 's';
+		}
+
+		if ( $metaboxes ) {
+			$this->metaboxes = $metaboxes;
 		}
 
 		if ( $overwrite ) {
@@ -130,12 +139,21 @@ abstract class Collection {
 		register_post_type( $this->post_type, $args );
 
 		// Use CMB to register custom metaboxes.
-		add_action( 'cmb2_init', [ $this, 'metaboxes'] );
+		if ( $this->metaboxes ) {
+			add_action( 'cmb2_init', [ $this, 'metaboxes'] );
+		}
 
 		add_filter( 'post_updated_messages', [ $this, 'post_updated_messages' ] );
 	}
 
 	public function metaboxes( ) {
+		if (! is_array($this->metaboxes)) {
+			return;
+		}
+
+		foreach ($this->metaboxes as $metabox) {
+			new Metabox($metabox);
+		}
 	}
 
 	public function post_updated_messages( $messages ) {
