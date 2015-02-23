@@ -29,11 +29,11 @@
     },
     "autoload": {
         "psr-0": {"RecordsOnRibs": "src/"},
-        "files": ["cmb2/init.php"]
+        "files": ["vendor/cmb2/init.php"]
     },
     "extra": {
         "installer-paths": {
-            "cmb2": ["webdevstudios/cmb2"]
+            "vendor/{$name}/": ["webdevstudios/cmb2"]
         }
     },
     "minimum-stability": "dev"

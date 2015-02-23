@@ -18,10 +18,10 @@ class Artists extends Collection {
 		$this->has_many( 'releases' );
 	}
 
-	function metaboxes( array $metaboxes ) {
+	function metaboxes( ) {
 		$prefix = '_artist_';
 
-		$metaboxes['urls'] = [
+		new \CMB2([
 			'id'            => $prefix . 'urls',
 			'title'         => 'Elsewhere',
 			'object_types'  => [ $this->post_type, ],
@@ -71,10 +71,10 @@ class Artists extends Collection {
 					'show_names' => false
 				]
 			]
-		];
+		]);
 
-		$metaboxes['press_information'] = [
-			'id'            => $prefix . 'urls',
+		new \CMB2([
+			'id'            => $prefix . 'press',
 			'title'         => 'Press Information',
 			'object_types'  => [ $this->post_type, ],
 			'context'       => 'normal',
@@ -86,8 +86,8 @@ class Artists extends Collection {
 				    'id' => $prefix . 'press_image',
 				    'type' => 'file',
 				    'options' => array(
-        				'add_upload_file_text' => 'Upload JPEG',
-    				),
+						'add_upload_file_text' => 'Upload JPEG',
+					),
 				    'allow' => [ 'attachment' ]
 				],
 				[
@@ -96,13 +96,11 @@ class Artists extends Collection {
 				    'id' => $prefix . 'press_image',
 				    'type' => 'file',
 				   	'options' => [
-        				'add_upload_file_text' => 'Upload PDF',
-    				],
+						'add_upload_file_text' => 'Upload PDF',
+					],
 				    'allow' => [ 'attachment' ]
 				]
 			]
-		];
-
-		return $metaboxes;
+		]);
 	}
 }
