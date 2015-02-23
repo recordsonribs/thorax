@@ -53,6 +53,18 @@ class Artists extends Collection {
 					'show_names' => false
 				],
 				[
+					'name'       => __( 'MusicBrainz' ),
+					'id'         => $prefix . 'musicbrainz',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
+					'name'       => __( 'Last.FM' ),
+					'id'         => $prefix . 'lastfm',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
 					'name'       => __( 'BandCamp' ),
 					'id'         => $prefix . 'bandcamp',
 					'type'       => 'text_url',
