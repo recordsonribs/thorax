@@ -17,4 +17,50 @@ class Artists extends Collection {
 
 		$this->has_many( 'releases' );
 	}
+
+	function metaboxes( array $metaboxes ) {
+		$prefix = '_artist_';
+
+		$metaboxes['urls'] = [
+			'id'            => $prefix . 'urls',
+			'title'         => 'Elsewhere',
+			'object_types'  => [ $this->post_type, ],
+			'context'       => 'side',
+			'priority' => 'low',
+			'fields' => [
+				[
+					'name'       => __( 'Website' ),
+					'id'         => $prefix . 'website',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
+					'name'       => __( 'Twitter' ),
+					'id'         => $prefix . 'twitter',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
+					'name'       => __( 'Facebook' ),
+					'id'         => $prefix . 'facebook',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
+					'name'       => __( 'SoundCloud' ),
+					'id'         => $prefix . 'soundcloud',
+					'type'       => 'text_url',
+					'show_names' => false
+				],
+				[
+					'name'       => __( 'BandCamp' ),
+					'id'         => $prefix . 'bandcamp',
+					'type'       => 'text_url',
+					'show_names' => false
+				]
+			]
+		];
+
+		return $metaboxes;
+	}
 }

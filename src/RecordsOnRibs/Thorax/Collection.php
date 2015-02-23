@@ -115,7 +115,6 @@ abstract class Collection {
 			'show_in_menu'         => true,
 			'menu_position'        => 50,
 			'supports'             => $supports,
-			'register_meta_box_cb' => array( $this, 'metaboxes' ),
 			'rewrite'              => array(
 										'slug' => strtolower( $this->plural ),
 										'with_front' => false,
@@ -130,7 +129,14 @@ abstract class Collection {
 
 		register_post_type( $this->post_type, $args );
 
+		// Use CMB to register custom metaboxes.
+		add_action( 'cmb2_meta_boxes', [ $this, 'metaboxes'] );
+
 		add_filter( 'post_updated_messages', [ $this, 'post_updated_messages' ] );
+	}
+
+	public function metaboxes( array $metaboxes ) {
+		return $metaboxes;
 	}
 
 	public function post_updated_messages( $messages ) {

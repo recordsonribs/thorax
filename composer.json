@@ -14,14 +14,27 @@
           "url": "https://github.com/recordsonribs/thorax.git",
           "reference": "master"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/WebDevStudios/CMB2"
+        }
+    ],
     "require" : {
-          "composer/installers": "v1.0.12"
+          "composer/installers": "v1.0.12",
+          "webdevstudios/cmb2": "dev-master"
     },
     "require-dev" : {
           "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-0": {"RecordsOnRibs": "src/"}
+        "psr-0": {"RecordsOnRibs": "src/"},
+        "files": ["cmb2/init.php"]
+    },
+    "extra": {
+        "installer-paths": {
+            "cmb2": ["webdevstudios/cmb2"]
+        }
     },
     "minimum-stability": "dev"
 }
