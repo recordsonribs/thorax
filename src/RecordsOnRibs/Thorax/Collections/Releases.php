@@ -26,7 +26,7 @@ class Releases extends Collection {
 			    'group_title'   => 'Track {#}',
 			    'add_button'    => 'Add Another Track',
 			    'remove_button' => 'Remove Track',
-			    'sortable'      => true, 
+			    'sortable'      => true
 			],
 			'fields'      => [
 			    [
