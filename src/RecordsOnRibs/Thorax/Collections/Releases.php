@@ -4,7 +4,7 @@ namespace RecordsOnRibs\Thorax\Collections;
 
 use RecordsOnRibs\Thorax\Collection as Collection;
 
-class Releases extends Collection { 
+class Releases extends Collection {
 	function __construct() {
 		$this->post_type = 'release';
 
@@ -37,19 +37,63 @@ class Releases extends Collection {
 				[
 				    'name' => 'Time',
 				    'id' => 'time',
-				    'type' => 'text_small'
+				    'type' => 'text_time'
+				]
+			],
+		];
+
+		$reviews = [
+			'id'          => $prefix . 'reviews',
+			'type'        => 'group',
+			'options'     => [
+			    'group_title'   => 'Review {#}',
+			    'add_button'    => 'Add A Review',
+			    'remove_button' => 'Remove Review',
+			    'sortable'      => true
+			],
+			'fields'      => [
+			    [
+			        'name' => 'Review Text',
+			        'id'   => 'text',
+			        'type' => 'textarea'
+			    ],
+				[
+				    'name' => 'Reviewer',
+				    'id' => 'reviewer',
+				    'type' => 'text'
+				],
+				[
+				    'name' => 'Publication',
+				    'id' => 'publication',
+				    'type' => 'text'
+				],
+				[
+						'name' => 'URL',
+						'id' => 'url',
+						'type' => 'text_url'
 				]
 			],
 		];
 
 		array_push($metaboxes, [
-			'id'            => $prefix . 'urls',
+			'id'            => $prefix . 'tracks',
 			'title'         => 'Tracks',
 			'object_types'  => [ $this->post_type ],
 			'context'       => 'normal',
 			'priority' => 'low',
 			'fields' => [
 				$tracks
+			]
+		]);
+
+		array_push($metaboxes, [
+			'id'            => $prefix . 'reviews',
+			'title'         => 'Reviews',
+			'object_types'  => [ $this->post_type ],
+			'context'       => 'normal',
+			'priority' => 'low',
+			'fields' => [
+				$reviews
 			]
 		]);
 
