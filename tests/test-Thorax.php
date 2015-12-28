@@ -12,7 +12,7 @@ class TestIntialise extends WP_UnitTestCase {
 		$this->assertTrue( isset($this->thorax) );
 	}
 
-	function testThoraxHasProperNamesapce() {
+	function testThoraxHasProperNamespace() {
 		$this->assertEquals( get_class($this->thorax), 'RecordsOnRibs\Thorax\Thorax');
 	}
 
