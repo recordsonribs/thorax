@@ -11,13 +11,21 @@ The new version of our record label management software. The successor to [Ribca
 
 Thorax is a plugin for [WordPress](http://wordpress.org), albeit one that heavily abstracts WordPress custom post type methods for ease of coding.
 
-Like its predecesor Ribcage we do so in the hope that since WordPress is widely avaliable, this plugin will enable easy creation of a Creative Commons label. Battlehardened by our own use, Thorax means that you too can setup a record label and begin distributing music in an attractive manner as quickly as possible.
+Like its predecesor Ribcage we do so in the hope that since WordPress is widely avaliable, this plugin will enable easy creation of a Creative Commons label. Battle hardened by our own use, Thorax means that you too can setup a record label and begin distributing music in an attractive manner as quickly as possible.
 
 # Installation
 
 1. Install this repository in the usual manner you would install a WordPress theme.
 2. `composer install` in that directory.
 3. Enjoy!
+
+# Running Tests
+
+This assumes PHP and MySQL are set up locally in the normal manner.
+
+1. Ensure `composer install` has run correctly.
+2. Run `bash bin/install-wp-tests.sh wordpress_test root '' localhost` the first time. This will download and install the WordPress test suite and PHPUnit helper utilities.
+3. Run `vendor/bin/phpunit` and wait for test completion.
 
 # Theming Thorax
 
