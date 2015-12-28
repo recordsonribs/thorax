@@ -113,7 +113,33 @@ class Releases extends Collection {
 			]
 		]);
 
+		$this->hook_save_releaser();
+
 		parent::__construct( [ 'parent' => true, 'metaboxes' => $metaboxes, 'overwrite' => $overwrites ] );
+	}
+
+	function hook_save_releaser(){
+		add_action( 'save_post', [ $this, 'save_releaser' ] );
+	}
+
+	function unhook_save_releaser(){
+		remove_action( 'save_post', [ $this, 'save_releaser' ] );
+	}
+
+	function get_releaser_meta( $post_id ){
+		return get_post_meta( $post_id, '_releaserelease_artist', true );
+	}
+
+	function save_releaser( $post_id ){
+		if ( $parent_id = wp_is_post_revision( $post_id ) ) {
+			$post_id = $parent_id;
+		}
+
+		$artist = $this->get_releaser_meta( $post_id );
+
+		$this->unhook_save_releaser();
+		wp_update_post( [ 'ID' => $post_id, 'post_parent' => $artist ] );
+		$this->hook_save_releaser();
 	}
 
 	function get_releasers(){
@@ -129,4 +155,5 @@ class Releases extends Collection {
 
 		return $post_options;
 	}
+
 }
