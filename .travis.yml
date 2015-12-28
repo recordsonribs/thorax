@@ -9,7 +9,6 @@ php:
 env:
     - WP_VERSION=latest WP_MULTISITE=0
     - WP_VERSION=4.4 WP_MULTISITE=0
-    - WP_VERSION=4.3.1 WP_MULTISITE=0
 
 install:
     - composer install
